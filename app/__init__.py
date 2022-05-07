@@ -9,7 +9,6 @@ from flask import Flask
 from app.context_processors import utility_text_processors
 from app.simple_pages import simple_pages
 from app.auth import auth
-from app.exceptions import http_exceptions
 from app.db.models import User
 from app.db import db
 from app.auth import auth
@@ -54,4 +53,4 @@ def user_loader(user_id):
     try:
         return User.query.get(int(user_id))
     except:
-        return Nonern app
+        return None
