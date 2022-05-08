@@ -88,12 +88,13 @@ def create_app():
             return "login first"
         
         if request.method == 'POST':
-            import pdb; pdb.set_trace()
+            file_name = request.form['file']
             db.session.add(CSVFile(
-                file_name=request.form['file']
+                file_name=file_name,
+                user_id=1
             ))
             db.session.commit()
-            return redirect(url_for('index'))
+            return render_template('home.html', message=f'Upload csv file {file_name} successfully')
         else:
             return redirect(url_for('index'))
 

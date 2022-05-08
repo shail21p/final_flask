@@ -52,5 +52,4 @@ class CSVFile(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     file_name = db.Column(db.String(120), unique=True, nullable=False)
-    file_name_2 = db.Column(db.String(120), unique=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
