@@ -4,7 +4,7 @@ import os
 from flask import Flask, render_template, Blueprint, session, request, redirect, url_for
 from app.cli import create_database
 from app.db import db
-from app.db.models import User
+from app.db.models import CSVFile, User
 from flask_bootstrap import Bootstrap5
 
 def page_not_found(e):
@@ -22,6 +22,7 @@ def create_app():
     # app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.abspath(db_dir)
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db.sqlite"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config['UPLOAD_FOLDER'] = '/file'
     db.init_app(app)
 
     # Create all app
@@ -42,7 +43,7 @@ def create_app():
     def login():
         if session.get('logged_in'):
             return render_template('home.html')
-            
+
         if request.method == 'GET':
             return render_template('login.html')
         else:
@@ -79,5 +80,21 @@ def create_app():
     def logout():
         session['logged_in'] = False
         return redirect(url_for('index'))
+
+    
+    @app.route('/upload', methods=['GET', 'POST'])
+    def upload():
+        if not session.get('logged_in'):
+            return "login first"
+        
+        if request.method == 'POST':
+            import pdb; pdb.set_trace()
+            db.session.add(CSVFile(
+                file_name=request.form['file']
+            ))
+            db.session.commit()
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for('index'))
 
     return app
