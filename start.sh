@@ -11,7 +11,7 @@ This is the most important step. NAVIGATE TO THE PATH WHERE “Dockerfile” is 
 # heroku container:push web -a <name of the heroku app>
 
 Creating the container on heroku host and hosting it publicly
-# heroku container:release web -a <name of heroku app>
+# heroku container:release web -a flask-app-shailpatel815
 
 To open the app in your default browser
 # heroku open -a <name of heroku app>
