@@ -1,27 +1,25 @@
 import pytest
-import requests as client
+from tests import app
+# import requests as client
 def test_uppercase():
     assert "loud noises".upper() == "LOUD NOISES"
 
-# @pytest.fixture
-def test_register():
-    response = client.post("http://localhost:5000/register", data={
+def test_register(app):
+    response = app.test_client().post("/register", data={
         "email": "akate@gmail.com",
         "password": "akate",
     })
     assert response.status_code == 200
 
 
-# @pytest.fixture
-def test_login():
-    response = client.post("http://localhost:5000/login", data={
+def test_login(app):
+    response = app.test_client().post("/login", data={
         "email": "akate@gmail.com",
         "password": "akate",
     })
     assert response.status_code == 200
 
 
-# @pytest.fixture
-def test_logout():
-    response = client.post('http://localhost:5000/logout')
+def test_logout(app):
+    response = app.test_client().post('/logout')
     assert response.status_code == 200
