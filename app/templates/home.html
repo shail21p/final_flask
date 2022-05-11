@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-50 p-b-90">
+				<span class="login100-form-title p-b-51">
+					Upload your CSV file<br>
+				</span>
+				<span class="login100-form-title p-b-51 text-success">
+					{{message}}<br>
+				</span>
+				<form class="login100-form validate-form flex-sb flex-w" method="POST" action="/upload">
+					<label class="form-label input100" for="customFile">Choose your CSV file to upload</label>
+					<input type="file" class="form-control" id="customFile" name="file"/>
+
+					<div class="container-login100-form-btn m-t-17">
+						<button class="login100-form-btn">
+							Upload
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}
